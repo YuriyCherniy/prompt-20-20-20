@@ -20,7 +20,7 @@ prompt_20_20_20() {
     fi
 
     local difference=$((time_limit - total_seconds))
-    local remains_minuts=$((difference / 60))
+    local remains_minutes=$((difference / 60))
     local remains_seconds=$((difference % 60))
 
     local color
@@ -31,12 +31,12 @@ prompt_20_20_20() {
     fi
 
     local state_file="/tmp/prompt-20-20-20.state"
-    local previos_limit
+    local previous_limit
     local missed=false
 
     if [[ -f "$state_file" ]]; then
-        previos_limit=$(cat "$state_file" 2>/dev/null)
-        if [[ -n "$previos_limit" && "$previos_limit" -ne $time_limit ]]; then
+        previous_limit=$(cat "$state_file" 2>/dev/null)
+        if [[ -n "$previous_limit" && "$previous_limit" -ne $time_limit ]]; then
             missed=true
         fi
     fi
@@ -48,5 +48,5 @@ prompt_20_20_20() {
         color="$RED"
     fi
 
-    printf "${color}[%02d:%02d]\033[0m" "$remains_minuts" "$remains_seconds"
+    printf "${color}[%02d:%02d]\033[0m" "$remains_minutes" "$remains_seconds"
 }
